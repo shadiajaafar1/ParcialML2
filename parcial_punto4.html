@@ -169,10 +169,8 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="intro.html">
-                    Welcome to your Jupyter Book
-                </a>
+          <li class="toctree-l1"><a class="reference internal" href="parcial_punto3.html">parcial_punto3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parcial_punto4.html">parcial_punto4</a></li>
             </li>
         </ul>
         
@@ -385,7 +383,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">TimeSeriesSplit</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBRegressor</span>
@@ -654,74 +652,15 @@ memory usage: 8.7+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">29</span>
-<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="c1"># Entrenar y evaluar cada modelo</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="ne">---&gt; </span><span class="mi">29</span>     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/core.py:730,</span> in <span class="ni">require_keyword_args.&lt;locals&gt;.throw_if.&lt;locals&gt;.inner_f</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span>     <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">arg</span>
-<span class="ne">--&gt; </span><span class="mi">730</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/sklearn.py:1073,</span> in <span class="ni">XGBModel.fit</span><span class="nt">(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1054</span> <span class="n">evals_result</span><span class="p">:</span> <span class="n">TrainingCallback</span><span class="o">.</span><span class="n">EvalsLog</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="g g-Whitespace">   </span><span class="mi">1055</span> <span class="n">train_dmatrix</span><span class="p">,</span> <span class="n">evals</span> <span class="o">=</span> <span class="n">_wrap_evaluation_matrices</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1056</span>     <span class="n">missing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">missing</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1057</span>     <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1071</span>     <span class="n">feature_types</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_types</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1072</span> <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1073</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_xgb_params</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1075</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1076</span>     <span class="n">obj</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Objective</span><span class="p">]</span> <span class="o">=</span> <span class="n">_objective_decorator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objective</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/sklearn.py:784,</span> in <span class="ni">XGBModel.get_xgb_params</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">782</span> <span class="k">def</span> <span class="nf">get_xgb_params</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">783</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get xgboost specific parameters.&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">784</span>     <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">786</span>     <span class="c1"># Parameters that should not go into native learner.</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>     <span class="n">wrapper_specific</span> <span class="o">=</span> <span class="p">{</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>         <span class="s2">&quot;importance_type&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span>         <span class="s2">&quot;kwargs&quot;</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">796</span>         <span class="s2">&quot;feature_types&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">797</span>     <span class="p">}</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/sklearn.py:769,</span> in <span class="ni">XGBModel.get_params</span><span class="nt">(self, deep)</span>
-<span class="g g-Whitespace">    </span><span class="mi">762</span> <span class="c1"># Based on: https://stackoverflow.com/questions/59248211</span>
-<span class="g g-Whitespace">    </span><span class="mi">763</span> <span class="c1"># The basic flow in `get_params` is:</span>
-<span class="g g-Whitespace">    </span><span class="mi">764</span> <span class="c1"># 0. Return parameters in subclass first, by using inspect.</span>
-<span class="g g-Whitespace">    </span><span class="mi">765</span> <span class="c1"># 1. Return parameters in `XGBModel` (the base class).</span>
-<span class="g g-Whitespace">    </span><span class="mi">766</span> <span class="c1"># 2. Return whatever in `**kwargs`.</span>
-<span class="g g-Whitespace">    </span><span class="mi">767</span> <span class="c1"># 3. Merge them.</span>
-<span class="g g-Whitespace">    </span><span class="mi">768</span> <span class="n">params</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">deep</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">769</span> <span class="n">cp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">770</span> <span class="n">cp</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">771</span> <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">get_params</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">deep</span><span class="p">))</span>
-
-<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/copy.py:92,</span> in <span class="ni">copy</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">     </span><span class="mi">90</span> <span class="n">reductor</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;__reduce_ex__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="k">if</span> <span class="n">reductor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">92</span>     <span class="n">rv</span> <span class="o">=</span> <span class="n">reductor</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">93</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span>     <span class="n">reductor</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;__reduce__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/sklearn/base.py:350,</span> in <span class="ni">BaseEstimator.__getstate__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">346</span>             <span class="n">repr_</span> <span class="o">=</span> <span class="n">repr_</span><span class="p">[:</span><span class="n">left_lim</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span> <span class="o">+</span> <span class="n">repr_</span><span class="p">[</span><span class="o">-</span><span class="n">right_lim</span><span class="p">:]</span>
-<span class="g g-Whitespace">    </span><span class="mi">348</span>     <span class="k">return</span> <span class="n">repr_</span>
-<span class="ne">--&gt; </span><span class="mi">350</span> <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span>     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;__slots__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">353</span>             <span class="s2">&quot;You cannot use `__slots__` in objects inheriting from &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span>             <span class="s2">&quot;`sklearn.base.BaseEstimator`.&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>         <span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Modelo      RMSE       MAPE       R^2
+0  Bayesian Regression  0.731257  32.197633  0.659042
+1        Decision Tree  0.837088  40.058707  0.583179
+2                 K-NN  0.727605  38.594042  0.683993
+3     Lasso Regression  0.761347  48.260296  0.655710
+4        Random Forest  0.586544  30.373149  0.795329
+5     Ridge Regression  0.733370  32.205976  0.656357
+6              XGBoost  0.587362  30.077084  0.794795
+El mejor modelo es: Random Forest con un RMSE de 0.5865439634378188
 </pre></div>
 </div>
 </div>
@@ -869,12 +808,8 @@ Mejores hiperparámetros encontrados: {&#39;bootstrap&#39;: True, &#39;max_depth
 <div class="prev-next-area">
     <a class="left-prev"
        href="parcial_punto3.html"
-       title="previous page">
+       title=""></a>
       <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
-      </div>
     </a>
 </div>
                 </footer>
