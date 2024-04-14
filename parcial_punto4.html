@@ -643,6 +643,13 @@ memory usage: 8.7+ MB
                 <span class="s1">&#39;MAPE&#39;</span><span class="p">:</span> <span class="n">mape</span><span class="p">,</span>
                 <span class="s1">&#39;R^2&#39;</span><span class="p">:</span> <span class="n">r2</span>
             <span class="p">})</span>
+
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span>
+<span class="n">average_results</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Modelo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">average_results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">average_results</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="n">average_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El mejor modelo es: </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">&#39;Modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con un RMSE de </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -656,113 +663,59 @@ memory usage: 8.7+ MB
 <span class="g g-Whitespace">     </span><span class="mi">30</span>     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/sklearn/base.py:1474,</span> in <span class="ni">_fit_context.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(estimator, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1467</span>     <span class="n">estimator</span><span class="o">.</span><span class="n">_validate_params</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span> <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1470</span>     <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span>         <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1473</span> <span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1474</span>     <span class="k">return</span> <span class="n">fit_method</span><span class="p">(</span><span class="n">estimator</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/core.py:730,</span> in <span class="ni">require_keyword_args.&lt;locals&gt;.throw_if.&lt;locals&gt;.inner_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>     <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">arg</span>
+<span class="ne">--&gt; </span><span class="mi">730</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/sklearn/ensemble/_forest.py:489,</span> in <span class="ni">BaseForest.fit</span><span class="nt">(self, X, y, sample_weight)</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span> <span class="n">trees</span> <span class="o">=</span> <span class="p">[</span>
-<span class="g g-Whitespace">    </span><span class="mi">479</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_make_estimator</span><span class="p">(</span><span class="n">append</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
-<span class="nn">    480     for i</span> in <span class="ni">range</span><span class="nt">(n_more_estimators)</span>
-<span class="g g-Whitespace">    </span><span class="mi">481</span> <span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span> <span class="c1"># Parallel loop: we prefer the threading backend as the Cython code</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span> <span class="c1"># for fitting the trees is internally releasing the Python GIL</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span> <span class="c1"># making threading more efficient than multiprocessing in</span>
-<span class="g g-Whitespace">    </span><span class="mi">486</span> <span class="c1"># that case. However, for joblib 0.12+ we respect any</span>
-<span class="g g-Whitespace">    </span><span class="mi">487</span> <span class="c1"># parallel_backend contexts set at a higher level,</span>
-<span class="g g-Whitespace">    </span><span class="mi">488</span> <span class="c1"># since correctness does not rely on using threads.</span>
-<span class="ne">--&gt; </span><span class="mi">489</span> <span class="n">trees</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span>     <span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">492</span>     <span class="n">prefer</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">494</span>     <span class="n">delayed</span><span class="p">(</span><span class="n">_parallel_build_trees</span><span class="p">)(</span>
-<span class="g g-Whitespace">    </span><span class="mi">495</span>         <span class="n">t</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">496</span>         <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">497</span>         <span class="n">X</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">498</span>         <span class="n">y</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">499</span>         <span class="n">sample_weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="n">i</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">501</span>         <span class="nb">len</span><span class="p">(</span><span class="n">trees</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span>         <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span>         <span class="n">class_weight</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">class_weight</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">504</span>         <span class="n">n_samples_bootstrap</span><span class="o">=</span><span class="n">n_samples_bootstrap</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">505</span>         <span class="n">missing_values_in_feature_mask</span><span class="o">=</span><span class="n">missing_values_in_feature_mask</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">506</span>     <span class="p">)</span>
-<span class="nn">    507     for i, t</span> in <span class="ni">enumerate</span><span class="nt">(trees)</span>
-<span class="g g-Whitespace">    </span><span class="mi">508</span> <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">510</span> <span class="c1"># Collect newly grown trees</span>
-<span class="g g-Whitespace">    </span><span class="mi">511</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimators_</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">trees</span><span class="p">)</span>
+<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/sklearn.py:1090,</span> in <span class="ni">XGBModel.fit</span><span class="nt">(self, X, y, sample_weight, base_margin, eval_set, eval_metric, early_stopping_rounds, verbose, xgb_model, sample_weight_eval_set, base_margin_eval_set, feature_weights, callbacks)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1079</span>     <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1081</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1082</span>     <span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1083</span>     <span class="n">metric</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1088</span>     <span class="n">xgb_model</span><span class="p">,</span> <span class="n">eval_metric</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">early_stopping_rounds</span><span class="p">,</span> <span class="n">callbacks</span>
+<span class="g g-Whitespace">   </span><span class="mi">1089</span> <span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1090</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Booster</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1091</span>     <span class="n">params</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1092</span>     <span class="n">train_dmatrix</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_num_boosting_rounds</span><span class="p">(),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span>     <span class="n">evals</span><span class="o">=</span><span class="n">evals</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span>     <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="n">early_stopping_rounds</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1096</span>     <span class="n">evals_result</span><span class="o">=</span><span class="n">evals_result</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1097</span>     <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1098</span>     <span class="n">custom_metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1099</span>     <span class="n">verbose_eval</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1100</span>     <span class="n">xgb_model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1101</span>     <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1102</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1104</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_evaluation_result</span><span class="p">(</span><span class="n">evals_result</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1105</span> <span class="k">return</span> <span class="bp">self</span>
 
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/sklearn/utils/parallel.py:67,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">63</span> <span class="n">iterable_with_config</span> <span class="o">=</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="p">(</span><span class="n">_with_config</span><span class="p">(</span><span class="n">delayed_func</span><span class="p">,</span> <span class="n">config</span><span class="p">),</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">for</span> <span class="n">delayed_func</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">iterable</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">67</span> <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">iterable_with_config</span><span class="p">)</span>
+<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/core.py:730,</span> in <span class="ni">require_keyword_args.&lt;locals&gt;.throw_if.&lt;locals&gt;.inner_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">728</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>     <span class="n">kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">arg</span>
+<span class="ne">--&gt; </span><span class="mi">730</span> <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/joblib/parallel.py:2007,</span> in <span class="ni">Parallel.__call__</span><span class="nt">(self, iterable)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2001</span> <span class="c1"># The first item from the output is blank, but it makes the interpreter</span>
-<span class="g g-Whitespace">   </span><span class="mi">2002</span> <span class="c1"># progress until it enters the Try/Except block of the generator and</span>
-<span class="g g-Whitespace">   </span><span class="mi">2003</span> <span class="c1"># reach the first `yield` statement. This starts the aynchronous</span>
-<span class="g g-Whitespace">   </span><span class="mi">2004</span> <span class="c1"># dispatch of the tasks to the workers.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2005</span> <span class="nb">next</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2007</span> <span class="k">return</span> <span class="n">output</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_generator</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/training.py:181,</span> in <span class="ni">train</span><span class="nt">(params, dtrain, num_boost_round, evals, obj, feval, maximize, early_stopping_rounds, evals_result, verbose_eval, xgb_model, callbacks, custom_metric)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span> <span class="k">if</span> <span class="n">cb_container</span><span class="o">.</span><span class="n">before_iteration</span><span class="p">(</span><span class="n">bst</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">,</span> <span class="n">evals</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span>     <span class="k">break</span>
+<span class="ne">--&gt; </span><span class="mi">181</span> <span class="n">bst</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dtrain</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">182</span> <span class="k">if</span> <span class="n">cb_container</span><span class="o">.</span><span class="n">after_iteration</span><span class="p">(</span><span class="n">bst</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">,</span> <span class="n">evals</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">183</span>     <span class="k">break</span>
 
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/joblib/parallel.py:1650,</span> in <span class="ni">Parallel._get_outputs</span><span class="nt">(self, iterator, pre_dispatch)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1647</span>     <span class="k">yield</span>
-<span class="g g-Whitespace">   </span><span class="mi">1649</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="o">.</span><span class="n">retrieval_context</span><span class="p">():</span>
-<span class="ne">-&gt; </span><span class="mi">1650</span>         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_retrieve</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1652</span> <span class="k">except</span> <span class="ne">GeneratorExit</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1653</span>     <span class="c1"># The generator has been garbage collected before being fully</span>
-<span class="g g-Whitespace">   </span><span class="mi">1654</span>     <span class="c1"># consumed. This aborts the remaining tasks if possible and warn</span>
-<span class="g g-Whitespace">   </span><span class="mi">1655</span>     <span class="c1"># the user if necessary.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1656</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/joblib/parallel.py:1762,</span> in <span class="ni">Parallel._retrieve</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1757</span> <span class="c1"># If the next job is not ready for retrieval yet, we just wait for</span>
-<span class="g g-Whitespace">   </span><span class="mi">1758</span> <span class="c1"># async callbacks to progress.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1759</span> <span class="k">if</span> <span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jobs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span>
-<span class="g g-Whitespace">   </span><span class="mi">1760</span>     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_jobs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_status</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1761</span>         <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span> <span class="o">==</span> <span class="n">TASK_PENDING</span><span class="p">)):</span>
-<span class="ne">-&gt; </span><span class="mi">1762</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1763</span>     <span class="k">continue</span>
-<span class="g g-Whitespace">   </span><span class="mi">1765</span> <span class="c1"># We need to be careful: the job list can be filling up as</span>
-<span class="g g-Whitespace">   </span><span class="mi">1766</span> <span class="c1"># we empty it and Python list are not thread-safe by</span>
-<span class="g g-Whitespace">   </span><span class="mi">1767</span> <span class="c1"># default hence the use of the lock</span>
+<span class="nn">File ~/Documents/Computer engineering/ParcialML2/.venv/lib/python3.11/site-packages/xgboost/core.py:2051,</span> in <span class="ni">Booster.update</span><span class="nt">(self, dtrain, iteration, fobj)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2047</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assign_dmatrix_features</span><span class="p">(</span><span class="n">dtrain</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2049</span> <span class="k">if</span> <span class="n">fobj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2050</span>     <span class="n">_check_call</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">2051</span>         <span class="n">_LIB</span><span class="o">.</span><span class="n">XGBoosterUpdateOneIter</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">2052</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handle</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">iteration</span><span class="p">),</span> <span class="n">dtrain</span><span class="o">.</span><span class="n">handle</span>
+<span class="g g-Whitespace">   </span><span class="mi">2053</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2054</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2055</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2056</span>     <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtrain</span><span class="p">,</span> <span class="n">output_margin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">all_results</span><span class="p">)</span>
-<span class="n">average_results</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Modelo&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">best_model</span> <span class="o">=</span> <span class="n">average_results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">average_results</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span> 
-
-<span class="nb">print</span><span class="p">(</span><span class="n">average_results</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;El mejor modelo es: </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">&#39;Modelo&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> con un RMSE de </span><span class="si">{</span><span class="n">best_model</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Modelo      RMSE       MAPE       R^2
-0  Bayesian Regression  0.731257  32.197633  0.659042
-1        Decision Tree  0.837247  39.958792  0.583035
-2                 K-NN  0.727605  38.594042  0.683993
-3     Lasso Regression  0.761347  48.260296  0.655710
-4        Random Forest  0.586512  30.394411  0.795378
-5     Ridge Regression  0.733370  32.205976  0.656357
-6              XGBoost  0.587362  30.077084  0.794795
-El mejor modelo es: Random Forest con un RMSE de 0.5865116556782988
 </pre></div>
 </div>
 </div>
