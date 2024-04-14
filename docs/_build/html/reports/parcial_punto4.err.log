@@ -39,6 +39,6 @@ Here is a preview of the cell contents:
 -------------------
 ['def percentage_error(actual, predicted):', '    res = np.empty(actual.shape)', '    for j in range(actual.shape[0]):', '        if actual[j] != 0:', '            res[j] = (actual[j] - predicted[j]) / actual[j]']
 ...
-["                'Modelo': name,", "                'RMSE': rmse,", "                'MAPE': mape,", "                'R^2': r2", '            })']
+["average_results = results_df.groupby('Modelo').mean().reset_index()", "best_model = average_results.loc[average_results['RMSE'].idxmin()] ", '', 'print(average_results)', 'print(f"El mejor modelo es: {best_model[\'Modelo\']} con un RMSE de {best_model[\'RMSE\']}")']
 -------------------
 
